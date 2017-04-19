@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { TweenLite } from 'gsap';
-import { Link, Element, scroller,Events, scrollSpy } from 'react-scroll';
+import { Element, scroller,Events } from 'react-scroll';
 import Zero from './components/Zero';
 import One from './components/One';
 import Two from './components/Two';
+import Three from './components/Three';
+import Four from './components/Four';
 import Controller from './components/Controller';
 
 class App extends Component {
@@ -21,12 +23,12 @@ class App extends Component {
 
   componentDidMount() {
   	window.onload = () => {
-  		console.log('loaded');
+  		// console.log('loaded');
   		this.setState({
   			liftLoaded: true
   		});
   		// document.body.scrollTop = document.documentElement.scrollTop = 0;
-  		console.log(this.refs.body.scrollTop);
+  		// console.log(this.refs.body.scrollTop);
   		this.refs.body.scrollTop = 100;
   	}
 
@@ -44,39 +46,45 @@ class App extends Component {
     this.refs.overlay.addEventListener('touchmove', (e) => {
 		  e.preventDefault();
 		}, false);
+    this.refs.loading.addEventListener('touchmove', (e) => {
+		  e.preventDefault();
+		}, false);
 
- 
-    scrollSpy.update();
-  }
+   }
 
   gotoFloor(floor) {
-  	this.setState({
-  		open: false,
-  		floor: parseInt(floor, 10)
-  	});
-  	this.refs.overlay.addEventListener('touchstart', (e) => {
-	  e.preventDefault();
-	}, false);
+    if (this.state.floor !== parseInt(floor, 10)) {
+    	this.setState({
+    		open: false,
+    		floor: parseInt(floor, 10)
+    	});
+   //  	this.refs.overlay.addEventListener('touchstart', (e) => {
+  	//   e.preventDefault();
+  	// }, false);
 
 
-	const screenTenPercent = screen.availHeight * 0.08
-	console.log(screenTenPercent);
+  	const screenTenPercent = screen.availHeight * 0.08
 
-  	this.closeDoor(() => {
-  		scroller.scrollTo(floor, {
-	  		duration: 2000,
-	  		smooth: true,
-	  		offset: - screenTenPercent
-	  	});
-  	});
+    	this.closeDoor(() => {
+    		scroller.scrollTo(floor, {
+  	  		duration: 2000,
+  	  		smooth: true,
+  	  		offset: - screenTenPercent,
+  	  		ignoreCancelEvents: true
+  	  	});
+    	});
+      
+    }
   }
 
   openDoor() {
-  	TweenLite.to(this.refs.leftDoor, 1, { x: '-100%' });
+  	TweenLite.to(this.refs.enter, 1, { autoAlpha: 0 });
+    TweenLite.to(this.refs.leftDoor, 1, { x: '-100%' });
     TweenLite.to(this.refs.rightDoor, 1, { x: '100%', onComplete: () => {
-	  	this.refs.overlay.removeEventListener('touchstart', false);
+	  	// this.refs.overlay.removeEventListener('touchstart', false);
 	    this.setState({
-	      open: true
+	      open: true,
+        entered: true
 	    });
     }});
   }
@@ -152,12 +160,20 @@ class App extends Component {
       	backgroundColor: 'hsla(0,0%,0%,1)',
       	display: 'flex',
       	justifyContent: 'center',
-		alignItems: 'center',
-		color: 'white',
-		fontSize: 32,
-		textTransform: 'uppercase',
-		letterSpacing: 3,
-		zIndex: 99999
+    		alignItems: 'center',
+    		color: 'white',
+    		fontSize: 32,
+    		textTransform: 'uppercase',
+    		letterSpacing: 3,
+    		zIndex: 99999
+      },
+      enter: {
+        position: 'absolute',
+        bottom: '20%',
+        left: '25%',
+        width: '50%',
+        zIndex: 99,
+        opacity: 0.9
       }
     }
 
@@ -169,14 +185,20 @@ class App extends Component {
 	          ref="leftDoor"
 	          style={css.leftDoor}
 	          alt="left door"
-	          src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/18/11492525341547-DoorLeft.jpg"
+	          src="http://assets.myntassets.com/w_480,fl_progressive/assets/images/lookbook/elevat2017/4/19/11492602658463-DoorLeft.jpg"
 	        />
 	        <img
 	          ref="rightDoor"
 	          style={css.rightDoor}
 	          alt="right door"
-	          src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/18/11492525341517-DoorRight.jpg"
+	          src="http://assets.myntassets.com/w_480,fl_progressive/assets/images/lookbook/elevat2017/4/19/11492602658453-DoorRight.jpg"
 	        />
+          <img
+            ref="enter"
+            style={css.enter}
+            alt="enter"
+            src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/19/11492602658434-Enter.png"
+          />
 	        </div>
 	      </div>
         <div ref="body" style={css.body}>
@@ -190,17 +212,17 @@ class App extends Component {
 	      	  <Two />
 	        </Element>
 	        <Element name="3">
-	      	  <Zero />
+	      	  <Three />
 	        </Element>
 	        <Element name="4">
-	      	  <One />
+	      	  <Four />
 	        </Element>
         </div>
         <Controller
         	floor={this.state.floor}
-    		gotoFloor={this.gotoFloor.bind(this)}
-    	/>
-        {(this.state.liftLoaded) ? '' : <div style={css.loading}>Loading&hellip;</div>}
+      		gotoFloor={this.gotoFloor.bind(this)}
+      	/>
+        {(this.state.liftLoaded) ? '' : <div ref="loading" style={css.loading}>Loading&hellip;</div>}
       </div>
     );
   }

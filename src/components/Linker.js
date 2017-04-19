@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 const Linker = (props) => {
 
 	const handelClick = (e) => {
-		const href = e.target.closest('a').href;
+		// const href = e.target.closest('a').href;
 		// ReactGA.event({
 	 //      category: 'Radium',
 	 //      action: props.gaAction,

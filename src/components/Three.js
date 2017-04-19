@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import HexaCarousel from './HexaCarousel';
 import Imager from './Imager';
-import { newReleases } from '../data';
+import { iconicCollection } from '../data';
 
-class Zero extends Component {
+class Three extends Component {
 	render() {
 
 		const css = {
@@ -14,7 +14,7 @@ class Zero extends Component {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				backgroundImage: 'url(http://assets.myntassets.com/w_480,q_60,fl_progressive/assets/images/lookbook/elevat2017/4/19/11492598236616-NewreleaseBg.jpg)',
+				backgroundImage: 'url(http://assets.myntassets.com/w_480,q_60,fl_progressive/assets/images/lookbook/elevat2017/4/19/11492598236639-IconicCollecrionBG.jpg)',
 				backgroundSize: 'cover'
 				// border: '1px solid tomato'
 			},
@@ -34,10 +34,10 @@ class Zero extends Component {
 			<div style={css.wrapper}>
 				<Imager
 					style={css.hanger}
-					label="new"
-					src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/19/11492598734940-NewReleaseHB-min.png"
+					label="icon"
+					src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/19/11492598734959-IconicCollectionHB-min.png"
 				/>
-				<HexaCarousel data={newReleases} ratio={491 / 480} />
+				<HexaCarousel data={iconicCollection} ratio={649 / 480}/>
 				<Imager
 				  style={css.join}
 				  gaAction="join"
@@ -49,4 +49,4 @@ class Zero extends Component {
 	}
 }
 
-export default Zero;
+export default Three;

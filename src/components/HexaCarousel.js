@@ -10,7 +10,7 @@ class HexaCarousel extends Component {
 		this.state = {
 			doneAnimating: true,
 			index: 0,
-			height: 300
+			height: 250 * this.props.ratio
 		}
 		this.n = props.data.length;
 		this.angelIncrement = 360 / this.n;
@@ -57,14 +57,14 @@ class HexaCarousel extends Component {
 
 		const n = this.props.data.length;
 		const angelIncrement = 360 / n;
-		const translateZ = 105 * Math.tan( this.toRadians( 90 * ( n - 2)/ n )  ) + n*2;
+		const translateZ = 125 * Math.tan( this.toRadians( 90 * ( n - 2)/ n )  ) + n*2;
 		let topZIndex = 999;
 
 		const items = this.props.data.map((item,i) => {
 			const css = {
 				wrapper: {
 					position: 'absolute',
-					maxWidth: 200,
+					maxWidth: 250,
 					height: this.state.height,
 					zIndex: (i <= n / 2) ? topZIndex-- : topZIndex++,
 					WebkitTransform: 'rotateY('+ i * angelIncrement +'deg) translateZ('+translateZ+'px)',
@@ -146,6 +146,7 @@ class HexaCarousel extends Component {
 							style={css.image}
 							src={item.imageUrl}
 							href={item.url}
+							label={item.title}
 						/>
 					</div>
 				);
@@ -169,9 +170,9 @@ class HexaCarousel extends Component {
 				WebkitPerspective: translateZ * 13,
 				msPerspective: translateZ * 13,
 				perspective: translateZ * 13,
-				maxWidth: 200,
+				maxWidth: 250,
 				height: this.state.height,
-				margin: '10% auto',
+				margin: '32px auto',
 			},
 			carousel: {
 			    position: 'absolute',
@@ -185,16 +186,16 @@ class HexaCarousel extends Component {
 				position: 'absolute',
 				top: '50%',
 				left: 0,
-				width: 40,
-				marginTop: -40,
+				width: '8%',
+				marginTop: -20,
 				height: 'auto'
 			},
 			next: {
 				position: 'absolute',
 				top: '50%',
 				right: 0,
-				width: 40,
-				marginTop: -40,
+				width: '8%',
+				marginTop: -20,
 				height: 'auto',
 				WebkitTransform: 'scaleX(-1)',
 				msTransform: 'scaleX(-1)',
@@ -203,20 +204,20 @@ class HexaCarousel extends Component {
 		}
 		return (
 			<div style={{width: '100%'}}>
-				<Swipeable
-					onSwipingLeft={this.moveToNext.bind(this)}
-					onSwipingRight={this.moveToPrev.bind(this)}
-				>
-					<div style={css.wrapper}>
-						<div style={css.container}>
-							<div ref="carousel" style={css.carousel}>
-								{this.renderItems()}
-							</div>
+			<Swipeable
+				onSwipingLeft={this.moveToNext.bind(this)}
+				onSwipingRight={this.moveToPrev.bind(this)}
+			>
+				<div style={css.wrapper}>
+					<div style={css.container}>
+						<div ref="carousel" style={css.carousel}>
+							{this.renderItems()}
 						</div>
-						<img onClick={this.moveToPrev.bind(this)} style={css.back} src="http://assets.myntassets.com/v1485858099/radium/premium-store/slices/arrow.png" alt="back" />
-						<img onClick={this.moveToNext.bind(this)} style={css.next} src="http://assets.myntassets.com/v1485858099/radium/premium-store/slices/arrow.png" alt="back" />
 					</div>
-				</Swipeable>
+					<img onClick={this.moveToPrev.bind(this)} style={css.back} src="http://assets.myntassets.com/v1485858099/radium/premium-store/slices/arrow.png" alt="back" />
+					<img onClick={this.moveToNext.bind(this)} style={css.next} src="http://assets.myntassets.com/v1485858099/radium/premium-store/slices/arrow.png" alt="back" />
+				</div>
+			</Swipeable>
 			</div>
 		);
 	}

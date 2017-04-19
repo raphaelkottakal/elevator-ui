@@ -34,7 +34,7 @@ class Controller extends Component {
 			<div ref="wrapper" style={css.wrapper}>
 				<img
 					alt="bg"
-					src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/18/11492522580432-buttonBgWithOutShadow.png"
+					src="http://assets.myntassets.com/w_480,q_60,fl_progressive/assets/images/lookbook/elevat2017/4/18/11492522580432-buttonBgWithOutShadow.png"
 				/>
 				<div style={css.buttons}>
 					<Columner>
