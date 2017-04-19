@@ -19,5 +19,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://www.myntra.com/radium/test/elevator3/"
+  "homepage": "http://www.myntra.com/radium/store/sneaker-elevator/"
 }
