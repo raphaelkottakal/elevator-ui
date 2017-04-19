@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TweenLite } from 'gsap';
+import ReactGA from 'react-ga';
 import { Element, scroller,Events } from 'react-scroll';
 import Zero from './components/Zero';
 import One from './components/One';
@@ -22,6 +23,8 @@ class App extends Component {
 
 
   componentDidMount() {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
   	window.onload = () => {
   		// console.log('loaded');
   		this.setState({

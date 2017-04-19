@@ -9,6 +9,7 @@
     "gsap": "^1.19.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-ga": "^2.2.0",
     "react-scroll": "^1.5.2",
     "react-swipeable": "^3.9.2"
   },
