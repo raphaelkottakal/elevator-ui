@@ -78,6 +78,11 @@ class App extends Component {
     	});
       
     }
+    ReactGA.event({
+      category: 'Radium',
+      action: 'got floor',
+      label : floor
+    });
   }
 
   openDoor() {
