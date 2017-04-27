@@ -73,7 +73,13 @@ class Four extends Component {
 							src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/19/11492599178991-MSC_SIS_02_07.png"
 						/>
 					</Columner>
+					<Imager
+					  gaAction="shop all"
+					  href="https://www.myntra.com/sneakercluball"
+					  src="http://assets.myntassets.com/assets/images/lookbook/elevat2017/4/27/11493294769644-ShopAll.png"
+					/>
 				</div>
+				
 				<Imager
 				  style={css.join}
 				  gaAction="join"
